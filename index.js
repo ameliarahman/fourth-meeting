@@ -1,53 +1,58 @@
-const http = require('http'); // Require core module NodeJS
-const profile = require('./profile');
-const country = require('country-state-city');
-const port = 2100;
+const http = require('http') // core module NodeJS
+const checkEmail = require('./checkEmail');
+const country = require('./countryList');
+const port = 3000;
 
 const server = http.createServer((req, res) => {
-    
-    if(req.url === '/profile') {
-        res.writeHead(200, {
-            'Content-Type': 'text/html',
-        })
-        res.write('This is profile page </br>')
-        res.write(`<h2>Name : ${profile().name} </h2>`);
-        res.write(`<h2>Email: ${profile().email} </h2>`)
-        res.write(`<h2>Check Email: ${profile().checkEmail} </h2> <br>`)
-        res.write('<a href=http://localhost:2100/blog>This is Blog Page</>')
-    } else if(req.url === '/blog') {
-        res.writeHead(200, {
-            'Content-Type': 'text/html',
-        })
-        res.write('This is blog page')
-        res.write("<a href=https://ameliarahman.github.io/>This is My Blog</> <br>")
-        res.write('<a href=http://localhost:2100/profile>This is Profile Page</>')
-    } else if(req.url === '/country') {
-        const countryName = country.Country.getCountryByCode('ID')
-        res.write('<h1>This is country name:<h1>')
-        res.write(JSON.stringify(countryName));
-    } else {
-        res.writeHead(404, {
-            'Content-Type': 'text/html',
-        })
-        res.write('<h1>Page Not Found<h1>')
-    }
- 
-    res.end()
-    // req ---> request dari client;
-    // res ---> response untuk client;
+  // request from client
+  // response to client
+  
+  console.log(req.method, 'THIS IS METHOD???')
+  if(req.url === '/profile') {
+    res.writeHead(200, {
+        'Content-Type': 'text/html'
+      })
+    res.write('<h1>This is Profile Menu</h1>')
+    res.write('Name: Amelia Rahman </br>')
+    res.write('Nasionality: Indonesia </br>')
+    res.write(`Country: ${country('ID')}`)
+  } else if(req.url === '/blog') {
+    res.writeHead(200, {
+        'Content-Type': 'text/html'
+      })
+    res.write(`Check Email of amel.rahman5@gmail.com: ${checkEmail('amel.rahman5@gmail.com')} </br>`)
+    res.write('<a href=https://ameliarahman.github.io/> Amelia`s blog </a>' )
+  } else if(req.url === '/') {
+    res.writeHead(200, {
+        'Content-Type': 'text/html'
+      })
+    res.write('<h1>This is main menu</h1>')
+    res.write('Menu:')
+    res.write('<li><a href=http://localhost:3000/profile> Profile</a> </li>')
+    res.write('<li><a href=http://localhost:3000/blog> Blog </a></li>')
+  } else {
+    res.writeHead(404, {
+        'Content-Type': 'text/html'
+      })
+    res.write('<h1>Not Found</h1>')
+  }
+  res.end()
 })
 
 server.listen(port, () => {
-    console.log(`Hai I'm listening to port ${port}`)
+    console.log(`HALLO I'M LISTENING TO PORT ${port}`)
 })
 
-// // const email = require('./checkEmail');
+// const checkEmail = require('./checkEmail');
+// const country = require('./countryList');
 
+// console.log(checkEmail("amelia@gmail.com"), 'THIS IS TO CHECK EMAIL FROM NPM')
+// console.log(checkEmail("amelia@gmail"), 'THIS IS TO CHECK EMAIL FROM NPM')
+// console.log(checkEmail("ameliagmail.com"), 'THIS IS TO CHECK EMAIL FROM NPM')
 
-// // console.log(email.checkEmail('amel.rahman5@gmail.com'), 'THIS IS CHECK EMAIL FORMAT')
+// console.log(country('US'), 'THIS IS FROM NPM COUNTRY LIST')
 
-// console.log('Console log 1')
-// console.log('Console log 2')
-setTimeout(() => {
- console.log('TO CHECK CALLBACK')   
-}, 6000)
+// console.log('HELLO FROM NON CALLBACK')
+// setTimeout(() => {
+//     console.log('HELLO FROM CALLBACK....')
+// }, 7000)

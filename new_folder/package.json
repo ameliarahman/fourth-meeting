@@ -6,20 +6,23 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node .",
-    "clariva": "node ."
+    "farhan": "node ."
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ameliarahman/fourth-meeting.git"
   },
-  "author": "",
+  "keywords": [
+    "npm"
+  ],
+  "author": "Amelia",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/ameliarahman/fourth-meeting/issues"
   },
   "homepage": "https://github.com/ameliarahman/fourth-meeting#readme",
   "dependencies": {
-    "country-list": "^2.3.0",
+    "country-state-city": "^3.1.4",
     "email-validator": "^2.0.4"
   }
 }
